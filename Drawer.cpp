@@ -13,19 +13,15 @@ std::string Drawer::getTag( ) {
 }
 
 Drawer::Drawer( ) {
-
 }
 
 Drawer::~Drawer( ) {
-
 }
 
 void Drawer::initialize( ) {
-
 }
 
 void Drawer::finalize( ) {
-
 }
 
 void Drawer::update( ) {
@@ -63,7 +59,7 @@ void Drawer::drawLine( float x1, float y1, float x2, float y2, int color ) {
 }
 
 void Drawer::drawString( float x, float y, int color, std::string str ) {
-	DrawFormatString( x, y, color, str.c_str( ) );
+	DrawFormatStringF( x, y, color, str.c_str( ) );
 }
 
 void Drawer::flip( ) {
