@@ -28,31 +28,10 @@ enum MACHINE_TYPE {
 	TEST,
 };
 
-enum COLOR {
-	BLACK,
-	WHITE,
-	RED,
-	BLUE,
-	WATER,
-	YELLOW,
-	PURPLE,
-	COLOR_MAX,
-};
-
 enum SCENE {
 	NONE_SCENE,
 	ALL,
 	CONNECT,
 	TITLE,
 	SCENE_MAX,
-};
-
-enum IMAGE {
-	NONE_IMAGE,
-	IMAGE_DIR_MAX
-};
-
-enum SOUND {
-	NONE_SOUND,
-	SOUND_MAX
 };
