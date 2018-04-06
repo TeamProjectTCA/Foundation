@@ -1,5 +1,4 @@
 #pragma once
-#include <string>
 #include "smart_ptr.h"
 
 PTR( Base );
