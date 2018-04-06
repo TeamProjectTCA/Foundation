@@ -164,7 +164,7 @@
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="LoadCSV.cpp" />
     <ClCompile Include="Manager.cpp" />
-    <ClCompile Include="MouseEvent.cpp" />
+    <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="MultiThreadLoad.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -175,7 +175,7 @@
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="LoadCSV.h" />
     <ClInclude Include="Manager.h" />
-    <ClInclude Include="MouseEvent.h" />
+    <ClInclude Include="Mouse.h" />
     <ClInclude Include="MultiThreadLoad.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

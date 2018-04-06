@@ -1,5 +1,4 @@
 #pragma once
-#include "smart_ptr.h"
 #include "Base.h"
 #include <map>
 #include <vector>
