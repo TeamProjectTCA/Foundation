@@ -1,11 +1,11 @@
 #pragma once
-#include "smart_ptr.h"
 #include "Base.h"
 #include <map>
 #include <vector>
 #include <string>
 
 PTR( Drawer );
+PTR( Image );
 
 class Drawer : public Base {
 public:
@@ -13,7 +13,7 @@ public:
 	static std::string getTag( );
 
 public:
-	Drawer( );
+	Drawer( std::string resource_path );
 	virtual ~Drawer( );
 
 public:
@@ -30,4 +30,10 @@ public:
 	void drawLine( float x1, float y1, float x2, float y2, int color );
 	void drawString( float x, float y, int color, std::string str );
 	void flip( );
+
+public:
+	int getImage( std::string file_name );
+
+private:
+	ImagePtr _image;
 };

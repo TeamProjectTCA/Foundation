@@ -1,6 +1,7 @@
 #include "Drawer.h"
 #include "DxLib.h"
 #include "Manager.h"
+#include "Image.h"
 #include <errno.h>
 #include <assert.h>
 
@@ -12,7 +13,8 @@ std::string Drawer::getTag( ) {
 	return "DRAWER";
 }
 
-Drawer::Drawer( ) {
+Drawer::Drawer( std::string resource_path ) {
+	_image = ImagePtr( new Image( resource_path ) );
 }
 
 Drawer::~Drawer( ) {
@@ -65,4 +67,8 @@ void Drawer::drawString( float x, float y, int color, std::string str ) {
 void Drawer::flip( ) {
 	ClearDrawScreen( );
 	ScreenFlip( );
+}
+
+int Drawer::getImage( std::string file_name ) {
+	return _image->getImage( file_name );
 }
