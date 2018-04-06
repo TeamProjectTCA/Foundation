@@ -159,6 +159,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Base.cpp" />
+    <ClCompile Include="Drawer.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="LoadCSV.cpp" />
     <ClCompile Include="Manager.cpp" />
@@ -168,6 +169,7 @@
   <ItemGroup>
     <ClInclude Include="Base.h" />
     <ClInclude Include="const.h" />
+    <ClInclude Include="Drawer.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="LoadCSV.h" />
     <ClInclude Include="Manager.h" />

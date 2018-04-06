@@ -7,6 +7,7 @@
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="MouseEvent.cpp" />
     <ClCompile Include="MultiThreadLoad.cpp" />
+    <ClCompile Include="Drawer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base.h" />
@@ -16,5 +17,6 @@
     <ClInclude Include="MouseEvent.h" />
     <ClInclude Include="MultiThreadLoad.h" />
     <ClInclude Include="const.h" />
+    <ClInclude Include="Drawer.h" />
   </ItemGroup>
 </Project>
