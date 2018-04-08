@@ -1,5 +1,6 @@
 #pragma once
 #include "Base.h"
+#include "Vector.h"
 #include <map>
 #include <vector>
 #include <string>
@@ -22,6 +23,7 @@ public:
 	void update( );
 
 public:
+	//2DŠÖŒW
 	void drawGraph( float x, float y, int handle, bool transflag );
 	void drawRotaGraph( float x, float y, double exrate, double angle, int handle, bool transflag );
 	void drawExtendGraph( float x1, float y1, float x2, float y2, int handle, bool transflag );
@@ -30,6 +32,12 @@ public:
 	void drawLine( float x1, float y1, float x2, float y2, int color );
 	void drawString( float x, float y, std::string str, unsigned int color );
 	void drawFormatString( float x, float y, unsigned int color, const char *str, ... );
+
+public:
+	//3DŠÖŒW
+	void drawShere( Vector pos, float r, int div_num, int dif_color, int spc_color, bool fillflag );
+
+public:
 	void flip( );
 
 public:

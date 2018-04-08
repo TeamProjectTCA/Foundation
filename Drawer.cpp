@@ -81,6 +81,14 @@ void Drawer::drawFormatString( float x, float y, unsigned int color, const char 
 	DrawStringF( x, y, buf, color );
 }
 
+void Drawer::drawShere( Vector pos, float r, int div_num, int dif_color, int spc_color, bool fillflag ) {
+	VECTOR vec = VECTOR( );
+	vec.x = ( float )pos.x;
+	vec.y = ( float )pos.y;
+	vec.z = ( float )pos.z;
+	DrawSphere3D( vec, r, div_num, dif_color, spc_color, fillflag );
+}
+
 void Drawer::flip( ) {
 	ClearDrawScreen( );
 	ScreenFlip( );
