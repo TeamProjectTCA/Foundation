@@ -1,19 +1,11 @@
 #include "DxLib.h"
 #include "Manager.h"
+#include "DxSetting.h"
 
 extern void main( );
 
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow ) {
-	
-	ChangeWindowMode( TRUE );
-	SetGraphMode( 1280, 720, 32 );
-	SetDoubleStartValidFlag( TRUE );
-	SetAlwaysRunFlag( TRUE );
-	if ( DxLib_Init( ) != 0 ) {
-		return -1;
-	}
-	SetDrawScreen( DX_SCREEN_BACK );
-
+	DxSetting::initialize( );
 	Manager::initialize( );
 	main( );
 
@@ -32,6 +24,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	}
 
 	Manager::finalize( );
+	DxSetting::finalize( );
 	DxLib_End( );
 	return 0;
 }

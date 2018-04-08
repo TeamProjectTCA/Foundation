@@ -10,6 +10,7 @@
     <ClCompile Include="Drawer.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="WinMain.cpp" />
+    <ClCompile Include="DxSetting.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base.h" />
@@ -21,5 +22,6 @@
     <ClInclude Include="Drawer.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Vector.h" />
+    <ClInclude Include="DxSetting.h" />
   </ItemGroup>
 </Project>
