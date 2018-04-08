@@ -16,7 +16,6 @@
     <ClInclude Include="LoadCSV.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="MultiThreadLoad.h" />
-    <ClInclude Include="const.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="Drawer.h" />
     <ClInclude Include="Mouse.h" />

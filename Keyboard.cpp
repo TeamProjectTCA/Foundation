@@ -172,7 +172,7 @@ int Keyboard::getState( std::string key ) {
 }
 
 std::string Keyboard::getString( ) {
-	std::map< std::string, int >::iterator ite;
+	std::unordered_map< std::string, int >::iterator ite;
 	ite = _key_state.begin( );
 	for ( ite; ite != _key_state.end( ); ite++ ) {
 		if ( ite->second == 1 ) {
@@ -191,5 +191,16 @@ bool Keyboard::getKeyUp( std::string key ) {
 		}
 	}
 
+	return false;
+}
+
+bool Keyboard::getKeyDown( std::string key ) {
+	if ( _key_state.find( key ) != _key_state.end( ) ) {
+		if ( _key_state[ key ] == 1 ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	return false;
 }
