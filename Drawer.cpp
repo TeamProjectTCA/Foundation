@@ -60,8 +60,25 @@ void Drawer::drawLine( float x1, float y1, float x2, float y2, int color ) {
 	DrawLineAA( x1, y1, x2, y2, color );
 }
 
-void Drawer::drawString( float x, float y, int color, std::string str ) {
-	DrawFormatStringF( x, y, color, str.c_str( ) );
+void Drawer::drawString( float x, float y, std::string str, unsigned int color ) {
+	DrawStringF( x, y, str.c_str( ), color );
+}
+
+void Drawer::drawFormatString( float x, float y, unsigned int color, const char *str, ... ) {
+
+	const int BUF_MAX = 1024;
+	char buf[ BUF_MAX ] = { };
+
+	va_list ap;
+	//str‚æ‚èŒã‚ë‚Ìˆø”‚ğŠi”[
+	va_start( ap, str );
+
+	//Ši”[‚µ‚½ˆø”‚ğbuf‚É’Ç‰Á
+	vsprintf_s( buf, BUF_MAX, str, ap );
+
+	//ƒŠƒXƒg‚ğƒNƒŠƒA
+	va_end( ap );
+	DrawStringF( x, y, buf, color );
 }
 
 void Drawer::flip( ) {
