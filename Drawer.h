@@ -32,7 +32,9 @@ public:
 	void flip( );
 
 public:
-	int getImage( std::string file_name );
+	int getImage( std::string file_name ) const;
+	int getImageWidth( std::string file_name ) const;
+	int getImageHeight( std::string file_name ) const;
 
 private:
 	ImagePtr _image;

@@ -11,9 +11,23 @@ _path( path ) {
 Image::~Image( ) {
 }
 
-int Image::getImage( std::string file_name ) {
+int Image::getImage( std::string file_name ) const {
 	if ( _images.find( file_name ) != _images.end( ) ) {
-		return _images[ file_name ];
+		return _images.find( file_name )->second.handle;
+	}
+	return -1;
+}
+
+int Image::getImageWidth( std::string file_name ) const {
+	if ( _images.find( file_name ) != _images.end( ) ) {
+		return _images.find( file_name )->second.width;
+	}
+	return -1;
+}
+
+int Image::getImageHeight( std::string file_name ) const {
+	if ( _images.find( file_name ) != _images.end( ) ) {
+		return _images.find( file_name )->second.height;
 	}
 	return -1;
 }
@@ -56,7 +70,8 @@ void Image::findFile( std::string path ) {
 
 			//拡張子を識別し、画像ロード
 			if ( file_extension == "png" || file_extension == "jpg" || file_extension == "jpeg" ) {
-				_images[ file_name ] = LoadGraph( ( path + data.cFileName ).c_str( ) );
+				_images[ file_name ].handle = LoadGraph( ( path + data.cFileName ).c_str( ) );
+				GetGraphSize( _images[ file_name ].handle, &_images[ file_name ].width, &_images[ file_name ].height );
 			}
 		}
 

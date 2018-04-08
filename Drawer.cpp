@@ -69,6 +69,14 @@ void Drawer::flip( ) {
 	ScreenFlip( );
 }
 
-int Drawer::getImage( std::string file_name ) {
+int Drawer::getImage( std::string file_name ) const {
 	return _image->getImage( file_name );
+}
+
+int Drawer::getImageWidth( std::string file_name ) const {
+	return _image->getImageWidth( file_name );
+}
+
+int Drawer::getImageHeight( std::string file_name ) const {
+	return _image->getImageHeight( file_name );
 }
