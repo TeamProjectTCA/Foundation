@@ -11,6 +11,9 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="DxSetting.cpp" />
+    <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Soundplayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base.h" />
@@ -23,5 +26,7 @@
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="DxSetting.h" />
+    <ClInclude Include="Sound.h" />
+    <ClInclude Include="Soundplayer.h" />
   </ItemGroup>
 </Project>
