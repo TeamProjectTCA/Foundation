@@ -105,19 +105,17 @@ struct Vector {
 			if ( max < num[ i ] ) {
 				max = num[ i ];
 			}
-			if ( max == 0.0 ) {
-				return 0;
-			}
-
-			//í¥âﬂÇµÇ»Ç¢ÇÊÇ§Ç…è¨êîì_ÇÇÇ∏ÇÁÇ∑
-			double x = this->x / max;
-			double y = this->y / max;
-			double z = this->z / max;
-
-			return sqrt( x * x + y * y + z * z ) * max;
+		}
+		if ( max == 0.0 ) {
+			return 0;
 		}
 
-		return x * x + y * y + z * z;
+		//í¥âﬂÇµÇ»Ç¢ÇÊÇ§Ç…è¨êîì_ÇÇÇ∏ÇÁÇ∑
+		double x = this->x / max;
+		double y = this->y / max;
+		double z = this->z / max;
+
+		return sqrt( x * x + y * y + z * z ) * max;
 	}
 
 	//ê≥ãKâª
