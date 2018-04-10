@@ -10,11 +10,11 @@ SoundplayerPtr Soundplayer::getTask( ) {
 }
 
 std::string Soundplayer::getTag( ) {
-	return "Soundplayer";
+	return "SOUNDPLAYER";
 }
 
-Soundplayer::Soundplayer( std::string resource_path ) {
-	_sound = SoundPtr( new Sound( resource_path ) );
+Soundplayer::Soundplayer( std::string sound_path ) {
+	_sound = SoundPtr( new Sound( sound_path ) );
 }
 
 Soundplayer::~Soundplayer( ) {
@@ -35,6 +35,7 @@ bool Soundplayer::isPlaying( std::string file_name ) {
 	}
 	return false;
 }
+
 void Soundplayer::play( std::string file_name, int volume, bool loop, bool top ) {
 	if ( getSound( file_name ) < 1 ) {
 		return;
@@ -55,6 +56,7 @@ void Soundplayer::play( std::string file_name, int volume, bool loop, bool top )
 	}
 
 }
+
 void Soundplayer::stop( std::string file_name ) {
 	StopSoundMem( getSound( file_name ) );
 }

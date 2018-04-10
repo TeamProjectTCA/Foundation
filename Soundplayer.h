@@ -1,8 +1,5 @@
 #pragma once
 #include "Base.h"
-#include "Vector.h"
-#include <map>
-#include <vector>
 #include <string>
 
 PTR( Soundplayer );
@@ -14,7 +11,7 @@ public:
 	static std::string getTag( );
 
 public:
-	Soundplayer( std::string resource_path );
+	Soundplayer( std::string sound_path );
 	virtual ~Soundplayer( );
 
 public:

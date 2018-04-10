@@ -2,7 +2,6 @@
 #include "smart_ptr.h"
 #include <string>
 #include <unordered_map>
-#include <Windows.h>
 
 PTR( Image );
 

@@ -2,9 +2,10 @@
 #include "DxLib.h"
 #include <errno.h>
 #include <assert.h>
+#include <Windows.h>
 
 Sound::Sound( std::string path ) :
-	_path( path ) {
+_path( path ) {
 	findFile( _path );
 }
 

@@ -13,8 +13,8 @@ std::string Drawer::getTag( ) {
 	return "DRAWER";
 }
 
-Drawer::Drawer( std::string resource_path ) {
-	_image = ImagePtr( new Image( resource_path ) );
+Drawer::Drawer( std::string image_path ) {
+	_image = ImagePtr( new Image( image_path ) );
 }
 
 Drawer::~Drawer( ) {

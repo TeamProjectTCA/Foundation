@@ -2,6 +2,7 @@
 #include "DxLib.h"
 #include <errno.h>
 #include <assert.h>
+#include <Windows.h>
 
 Image::Image( std::string path ) :
 _path( path ) {

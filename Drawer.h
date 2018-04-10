@@ -1,7 +1,6 @@
 #pragma once
 #include "Base.h"
 #include "Vector.h"
-#include <map>
 #include <vector>
 #include <string>
 
@@ -14,7 +13,7 @@ public:
 	static std::string getTag( );
 
 public:
-	Drawer( std::string resource_path );
+	Drawer( std::string image_path );
 	virtual ~Drawer( );
 
 public:
