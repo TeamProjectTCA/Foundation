@@ -21,7 +21,84 @@ struct Vector {
 	virtual ~Vector( ) {
 	}
 
-	double length( ) const {
+	//‘«‚µŽZ
+	inline Vector add( const Vector &vec ) {
+		return Vector( 
+			x + vec.x,
+			y + vec.y,
+			z + vec.z );
+	}
+	inline Vector operator+( const Vector &vec ) {
+		return add( vec );
+	}
+	inline Vector operator+=( const Vector &vec ) {
+		*this = *this + vec;
+		return *this;
+	}
+
+	//ˆø‚«ŽZ
+	inline Vector sub( const Vector &vec ) {
+		return Vector( 
+			this->x - vec.x,
+			this->y - vec.y,
+			this->z - vec.z );
+	}
+	inline Vector operator-( const Vector &vec ) {
+		return sub( vec );
+	}
+	inline Vector operator-=( const Vector &vec ) {
+		*this = *this - vec;
+		return *this;
+	}
+
+	//Š|‚¯ŽZ
+	inline Vector mult( const Vector &vec ) {
+		return Vector( 
+			x * vec.x,
+			y * vec.y,
+			z * vec.z );
+	}
+	inline Vector operator*( const Vector &vec ) {
+		return mult( vec );
+	}
+	inline Vector operator*=( const Vector &vec ) {
+		*this = *this * vec;
+		return *this;
+	}
+
+	//Š„‚èŽZ
+	inline Vector dif( const Vector &vec ) {
+		return Vector( 
+			x / vec.x,
+			y / vec.y,
+			z / vec.z );
+	}
+	inline Vector operator/( const Vector &vec ) {
+		return dif( vec );
+	}
+	inline Vector operator/=( const Vector &vec ) {
+		*this = *this / vec;
+		return *this;
+	}
+
+	//”äŠr ==
+	inline bool operator==( const Vector &vec ) {
+		return ( 
+			x == vec.x &&
+			y == vec.y &&
+			z == vec.z );
+	}
+
+	//”äŠr !=
+	inline bool operator!=( const Vector &vec ) {
+		return (
+			x != vec.x ||
+			y != vec.y ||
+			z != vec.z );
+	}
+
+	//‹——£‚ð•Ô‚·
+	inline double getLength( ) const {
 		double num[ 3 ] = { fabs( x ), fabs( y ), fabs( z ) };
 		double max = num[ 0 ];
 		for ( int i = 1; i < 3; i++ ) {
@@ -41,5 +118,13 @@ struct Vector {
 		}
 
 		return x * x + y * y + z * z;
+	}
+
+	//³‹K‰»
+	inline Vector normalize( ) {
+		double len = getLength( );
+		Vector normal = Vector( x / len, y / len, z / len );
+
+		return normal;
 	}
 };
