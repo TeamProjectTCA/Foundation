@@ -169,7 +169,6 @@
     <ClCompile Include="MultiThreadLoad.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Soundplayer.cpp" />
-    <ClCompile Include="Source.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
