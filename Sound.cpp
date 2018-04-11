@@ -14,7 +14,7 @@ Sound::~Sound( ) {
 
 int Sound::getSound( std::string file_name ) const {
 	if ( _sounds.find( file_name ) != _sounds.end( ) ) {
-		return _sounds.find( file_name )->second.handle;
+		return _sounds.find( file_name )->second;
 	}
 	return -1;
 }
@@ -56,8 +56,8 @@ void Sound::findFile( std::string path ) {
 			}
 
 			//拡張子を識別し、サウンドロード
-			if ( file_extension == "png" || file_extension == "jpg" || file_extension == "jpeg" ) {
-				_sounds[ file_name ].handle = LoadGraph( ( path + data.cFileName ).c_str( ) );
+			if ( file_extension == "mp3" || file_extension == "ogg" ) {
+				_sounds[ file_name ] = LoadSoundMem( ( path + data.cFileName ).c_str( ) );
 			}
 		}
 
