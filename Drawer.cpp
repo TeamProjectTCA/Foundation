@@ -94,7 +94,7 @@ void Drawer::flip( ) {
 	ScreenFlip( );
 }
 
-int Drawer::getColor( int R, int G, int B )const {
+int Drawer::getColor( int R, int G, int B ) const {
 	if ( R < 0   || G < 0   || B < 0   || 
 		 R > 255 || G > 255 || B > 255 ) {
 		return 0;

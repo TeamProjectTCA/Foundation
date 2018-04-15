@@ -2,12 +2,7 @@
 #include <math.h>
 
 struct Vector {
-	struct BoxCollider {
-		float left;
-		float right;
-		float up;
-		float down;
-	};
+
 	double x;
 	double y;
 	double z;
@@ -132,4 +127,4 @@ struct Vector {
 		return normal;
 	}
 
-};	
+};

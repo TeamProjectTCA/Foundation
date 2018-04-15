@@ -27,5 +27,6 @@
     <ClInclude Include="DxSetting.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Soundplayer.h" />
+    <ClInclude Include="Collider.h" />
   </ItemGroup>
 </Project>
