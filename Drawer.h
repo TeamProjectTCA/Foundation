@@ -40,7 +40,6 @@ public:
 	void flip( );
 
 public:
-	int getColor( int R, int G, int B ) const;
 	int getImage( std::string file_name ) const;
 	int getImageWidth( std::string file_name ) const;
 	int getImageHeight( std::string file_name ) const;
