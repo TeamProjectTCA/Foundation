@@ -13,6 +13,7 @@
     <ClCompile Include="DxSetting.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Soundplayer.cpp" />
+    <ClCompile Include="Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base.h" />
@@ -28,5 +29,6 @@
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Soundplayer.h" />
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="Camera.h" />
   </ItemGroup>
 </Project>
