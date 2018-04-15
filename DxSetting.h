@@ -24,6 +24,7 @@ public:
 public:
 	void setCameraNearFar( float near_length, float far_length );
 	void setUseLighting( bool flag );
+	void setUseZBuffer( bool flag );
 
 private:
 	static DxSettingPtr _instance;

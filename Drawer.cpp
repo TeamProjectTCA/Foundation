@@ -81,7 +81,16 @@ void Drawer::drawFormatString( float x, float y, unsigned int color, const char 
 	DrawStringF( x, y, buf, color );
 }
 
-void Drawer::drawShere( Vector pos, float r, int div_num, int dif_color, int spc_color, bool fillflag ) {
+void Drawer::drawBillBoard3D( Vector pos, float cx, float cy, float size, float angle, int handle, bool transflag ) {
+	VECTOR vec = VECTOR( );
+	vec.x = ( float )pos.x;
+	vec.y = ( float )pos.y;
+	vec.z = ( float )pos.z;
+
+	DrawBillboard3D( vec, cx, cy, size, angle, handle, transflag );
+}
+
+void Drawer::drawShere3D( Vector pos, float r, int div_num, int dif_color, int spc_color, bool fillflag ) {
 	VECTOR vec = VECTOR( );
 	vec.x = ( float )pos.x;
 	vec.y = ( float )pos.y;

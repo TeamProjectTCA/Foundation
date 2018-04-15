@@ -62,3 +62,8 @@ void DxSetting::setCameraNearFar( float near_length, float far_length ) {
 void DxSetting::setUseLighting( bool flag ) {
 	SetUseLighting( flag );
 }
+
+void DxSetting::setUseZBuffer( bool flag ) {
+	SetUseZBufferFlag( flag );
+	SetWriteZBufferFlag( flag );
+}

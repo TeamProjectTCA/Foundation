@@ -34,7 +34,10 @@ public:
 
 public:
 	//3D関係
-	void drawShere( Vector pos, float r, int div_num, int dif_color, int spc_color, bool fillflag );
+
+	//描画座標、画像中心X、画像中心Y、サイズ、アングル、ハンドル、透明度有効化
+	void drawBillBoard3D( Vector pos, float cx, float cy, float size, float angle, int handle, bool transflag );
+	void drawShere3D( Vector pos, float r, int div_num, int dif_color, int spc_color, bool fillflag );
 
 public:
 	void flip( );
