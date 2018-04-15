@@ -94,6 +94,14 @@ void Drawer::flip( ) {
 	ScreenFlip( );
 }
 
+int Drawer::getColor( int R, int G, int B )const {
+	if ( R < 0   || G < 0   || B < 0   || 
+		 R > 255 || G > 255 || B > 255 ) {
+		return 0;
+	}
+	return GetColor( R, G, B );
+}
+
 int Drawer::getImage( std::string file_name ) const {
 	return _image->getImage( file_name );
 }
