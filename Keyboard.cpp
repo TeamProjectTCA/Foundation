@@ -134,8 +134,21 @@ Keyboard::Keyboard( ) {
 	_numpad_state[ "." ] = 0;
 	_numpad_state[ "/" ] = 0;
 
-	_enter = false;
-	_backspace = 0;
+	//エンターなどのコマンドキー
+	_command[ KEY_INPUT_RETURN ] = 0;
+	_command[ KEY_INPUT_BACK   ] = 0;
+	_command[ KEY_INPUT_F1     ] = 0;
+	_command[ KEY_INPUT_F2     ] = 0;
+	_command[ KEY_INPUT_F3     ] = 0;
+	_command[ KEY_INPUT_F4     ] = 0;
+	_command[ KEY_INPUT_F5     ] = 0;
+	_command[ KEY_INPUT_F6     ] = 0;
+	_command[ KEY_INPUT_F7     ] = 0;
+	_command[ KEY_INPUT_F8     ] = 0;
+	_command[ KEY_INPUT_F9     ] = 0;
+	_command[ KEY_INPUT_F10    ] = 0;
+	_command[ KEY_INPUT_F11    ] = 0;
+	_command[ KEY_INPUT_F12    ] = 0;
 }
 
 Keyboard::~Keyboard( ) {
@@ -154,6 +167,7 @@ void Keyboard::update( ) {
 	GetHitKeyStateAll( key_c );
 
 	for ( int i = 0; i < KEY_MAX; i++ ) {
+		//通常キー
 		if ( _key_string.find( i ) != _key_string.end( ) ) {
 			std::string str = _key_string[ i ];
 
@@ -190,6 +204,15 @@ void Keyboard::update( ) {
 				_numpad_state[ str ] = 0;
 			}
 		}
+
+		//エンターなど
+		if ( _command.find( i ) != _command.end( ) ) {
+			if ( key_c[ i ] ) {
+				_command[ i ]++;
+			} else {
+				_command[ i ] = 0;
+			}
+		}
 	}
 
 	//テンキーの情報と統合する
@@ -204,28 +227,17 @@ void Keyboard::update( ) {
 			_key_state[ str ] = num;
 		}
 	}
-
-	_enter = false;
-	if ( CheckHitKey( KEY_INPUT_RETURN ) ) {
-		_enter = true;
-	}
-
-	if ( CheckHitKey( KEY_INPUT_BACK ) ) {
-		_backspace++;
-	} else {
-		_backspace = 0;
-	}
 }
 
-int Keyboard::getState( std::string key ) {
+int Keyboard::getState( std::string key ) const {
 	if ( _key_state.find( key ) != _key_state.end( ) ) {
-		return _key_state[ key ];
+		return _key_state.find( key )->second;
 	}
 	return 0;
 }
 
-std::string Keyboard::getString( ) {
-	std::unordered_map< std::string, int >::iterator ite;
+std::string Keyboard::getString( ) const {
+	std::unordered_map< std::string, int >::const_iterator ite;
 	ite = _key_state.begin( );
 	for ( ite; ite != _key_state.end( ); ite++ ) {
 		if ( ite->second == 1 ) {
@@ -236,7 +248,7 @@ std::string Keyboard::getString( ) {
 	return "";
 }
 
-bool Keyboard::getKeyUp( std::string key ) {
+bool Keyboard::getKeyUp( std::string key ) const {
 	int size = ( int )_key_up.size( );
 	for ( int i = 0; i < size; i++ ) {
 		if ( _key_up[ i ] == key ) {
@@ -247,9 +259,9 @@ bool Keyboard::getKeyUp( std::string key ) {
 	return false;
 }
 
-bool Keyboard::getKeyDown( std::string key ) {
+bool Keyboard::getKeyDown( std::string key ) const {
 	if ( _key_state.find( key ) != _key_state.end( ) ) {
-		if ( _key_state[ key ] == 1 ) {
+		if ( _key_state.find( key )->second == 1 ) {
 			return true;
 		} else {
 			return false;
@@ -259,9 +271,30 @@ bool Keyboard::getKeyDown( std::string key ) {
 }
 
 bool Keyboard::isEnterKey( ) const {
-	return _enter;
+	return ( _command.find( KEY_INPUT_RETURN )->second == 1 );
+}
+
+bool Keyboard::isKeyDownFunction( int num ) const {
+	int code = KEY_INPUT_F1;
+	switch ( num ) {
+	case 2 : code = KEY_INPUT_F2 ; break;
+	case 3 : code = KEY_INPUT_F3 ; break;
+	case 4 : code = KEY_INPUT_F4 ; break;
+	case 5 : code = KEY_INPUT_F5 ; break;
+	case 6 : code = KEY_INPUT_F6 ; break;
+	case 7 : code = KEY_INPUT_F7 ; break;
+	case 8 : code = KEY_INPUT_F8 ; break;
+	case 9 : code = KEY_INPUT_F9 ; break;
+	case 10: code = KEY_INPUT_F10; break;
+	case 11: code = KEY_INPUT_F11; break;
+	case 12: code = KEY_INPUT_F12; break;
+	default: 
+		break;
+	}
+
+	return ( _command.find( code )->second == 1 );
 }
 
 int Keyboard::getBackSpace( ) const {
-	return _backspace;
+	return _command.find( KEY_INPUT_BACK )->second;
 }

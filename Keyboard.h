@@ -21,11 +21,12 @@ public:
 	void update( );
 
 public:
-	int getState( std::string key );
-	std::string getString( );
-	bool getKeyUp( std::string key );
-	bool getKeyDown( std::string key );
+	int getState( std::string key ) const;
+	std::string getString( ) const;
+	bool getKeyUp( std::string key ) const;
+	bool getKeyDown( std::string key ) const;
 	bool isEnterKey( ) const;
+	bool isKeyDownFunction( int num ) const;
 	int getBackSpace( ) const;
 
 private:
@@ -33,8 +34,7 @@ private:
 	std::unordered_map< int, std::string > _numpad_string;
 	std::unordered_map< std::string, int > _key_state;
 	std::unordered_map< std::string, int > _numpad_state;
+	std::unordered_map< int, int > _command;
 	std::vector< std::string > _key_up;
-	int _backspace;
-	bool _enter;
 };
 
