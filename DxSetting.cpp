@@ -4,12 +4,13 @@
 DxSettingPtr DxSetting::_instance;
 
 DxSetting::DxSetting( ) {
-	ChangeWindowMode( TRUE );
-	SetGraphMode( 1280, 720, 32 );
+	changeWindowMode( true );
+	setWindowSize( 1280, 720 );
+	setGraphMode( 1280, 720, 60 );
 	SetDoubleStartValidFlag( TRUE );
 	SetAlwaysRunFlag( TRUE );
 	DxLib_Init( );
-	SetDrawScreen( DX_SCREEN_BACK );
+	setDrawScreenBack( );
 }
 
 DxSetting::~DxSetting( ) {
