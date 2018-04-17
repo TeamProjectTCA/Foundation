@@ -6,7 +6,7 @@ DxSettingPtr DxSetting::_instance;
 DxSetting::DxSetting( ) {
 	changeWindowMode( true );
 	setWindowSize( 1280, 720 );
-	setGraphMode( 1280, 720, 60 );
+	setGraphMode( 1280, 720, 32 );
 	SetDoubleStartValidFlag( TRUE );
 	SetAlwaysRunFlag( TRUE );
 	DxLib_Init( );

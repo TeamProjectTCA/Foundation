@@ -54,22 +54,6 @@ Keyboard::Keyboard( ) {
 	_key_string[ KEY_INPUT_MINUS     ] = "-";
 	_key_string[ KEY_INPUT_PERIOD    ] = ".";
 	_key_string[ KEY_INPUT_SLASH     ] = "/";
-	_key_string[ KEY_INPUT_NUMPAD0   ] = "0";
-	_key_string[ KEY_INPUT_NUMPAD1   ] = "1";
-	_key_string[ KEY_INPUT_NUMPAD2   ] = "2";
-	_key_string[ KEY_INPUT_NUMPAD3   ] = "3";
-	_key_string[ KEY_INPUT_NUMPAD4   ] = "4";
-	_key_string[ KEY_INPUT_NUMPAD5   ] = "5";
-	_key_string[ KEY_INPUT_NUMPAD6   ] = "6";
-	_key_string[ KEY_INPUT_NUMPAD7   ] = "7";
-	_key_string[ KEY_INPUT_NUMPAD8   ] = "8";
-	_key_string[ KEY_INPUT_NUMPAD9   ] = "9";
-	_key_string[ KEY_INPUT_MULTIPLY  ] = "*";
-	_key_string[ KEY_INPUT_ADD       ] = "+";
-	_key_string[ KEY_INPUT_SUBTRACT  ] = "-";
-	_key_string[ KEY_INPUT_DECIMAL   ] = ".";
-	_key_string[ KEY_INPUT_DIVIDE    ] = "/";
-	_key_string[ KEY_INPUT_SPACE     ] = " ";
 
 	_key_state[ "0" ] = 0;
 	_key_state[ "1" ] = 0;
@@ -110,22 +94,48 @@ Keyboard::Keyboard( ) {
 	_key_state[ "-" ] = 0;
 	_key_state[ "." ] = 0;
 	_key_state[ "/" ] = 0;
-	_key_state[ "0" ] = 0;
-	_key_state[ "1" ] = 0;
-	_key_state[ "2" ] = 0;
-	_key_state[ "3" ] = 0;
-	_key_state[ "4" ] = 0;
-	_key_state[ "5" ] = 0;
-	_key_state[ "6" ] = 0;
-	_key_state[ "7" ] = 0;
-	_key_state[ "8" ] = 0;
-	_key_state[ "9" ] = 0;
 	_key_state[ "*" ] = 0;
 	_key_state[ "+" ] = 0;
 	_key_state[ "-" ] = 0;
 	_key_state[ "." ] = 0;
 	_key_state[ "/" ] = 0;
 	_key_state[ " " ] = 0;
+
+	//テンキー
+	_numpad_string[ KEY_INPUT_NUMPAD0   ] = "0";
+	_numpad_string[ KEY_INPUT_NUMPAD1   ] = "1";
+	_numpad_string[ KEY_INPUT_NUMPAD2   ] = "2";
+	_numpad_string[ KEY_INPUT_NUMPAD3   ] = "3";
+	_numpad_string[ KEY_INPUT_NUMPAD4   ] = "4";
+	_numpad_string[ KEY_INPUT_NUMPAD5   ] = "5";
+	_numpad_string[ KEY_INPUT_NUMPAD6   ] = "6";
+	_numpad_string[ KEY_INPUT_NUMPAD7   ] = "7";
+	_numpad_string[ KEY_INPUT_NUMPAD8   ] = "8";
+	_numpad_string[ KEY_INPUT_NUMPAD9   ] = "9";
+	_numpad_string[ KEY_INPUT_MULTIPLY  ] = "*";
+	_numpad_string[ KEY_INPUT_ADD       ] = "+";
+	_numpad_string[ KEY_INPUT_SUBTRACT  ] = "-";
+	_numpad_string[ KEY_INPUT_DECIMAL   ] = ".";
+	_numpad_string[ KEY_INPUT_DIVIDE    ] = "/";
+
+	_numpad_state[ "0" ] = 0;
+	_numpad_state[ "1" ] = 0;
+	_numpad_state[ "2" ] = 0;
+	_numpad_state[ "3" ] = 0;
+	_numpad_state[ "4" ] = 0;
+	_numpad_state[ "5" ] = 0;
+	_numpad_state[ "6" ] = 0;
+	_numpad_state[ "7" ] = 0;
+	_numpad_state[ "8" ] = 0;
+	_numpad_state[ "9" ] = 0;
+	_numpad_state[ "*" ] = 0;
+	_numpad_state[ "+" ] = 0;
+	_numpad_state[ "-" ] = 0;
+	_numpad_state[ "." ] = 0;
+	_numpad_state[ "/" ] = 0;
+
+	_enter = false;
+	_backspace = 0;
 }
 
 Keyboard::~Keyboard( ) {
@@ -161,6 +171,49 @@ void Keyboard::update( ) {
 				_key_state[ str ] = 0;
 			}
 		}
+
+		//テンキー
+		if ( _numpad_string.find( i ) != _numpad_string.end( ) ) {
+			std::string str = _numpad_string[ i ];
+
+			if ( _numpad_state.find( str ) == _numpad_state.end( ) ) {
+				errno_t not_find_keycode = 0;
+				assert( not_find_keycode );
+			}
+
+			if ( key_c[ i ] ) {
+				_numpad_state[ str ]++;
+			} else {
+				if ( _numpad_state[ str ] != 0 ) {
+					_key_up.push_back( str );
+				}
+				_numpad_state[ str ] = 0;
+			}
+		}
+	}
+
+	//テンキーの情報と統合する
+	std::unordered_map< std::string, int >::iterator ite;
+	ite = _numpad_state.begin( );
+	for ( ite; ite != _numpad_state.end( ); ite++ ) {
+		std::string str = ite->first;
+		int num = ite->second;
+
+		//大きいほうを優先
+		if ( _key_state[ str ] < num ) {
+			_key_state[ str ] = num;
+		}
+	}
+
+	_enter = false;
+	if ( CheckHitKey( KEY_INPUT_RETURN ) ) {
+		_enter = true;
+	}
+
+	if ( CheckHitKey( KEY_INPUT_BACK ) ) {
+		_backspace++;
+	} else {
+		_backspace = 0;
 	}
 }
 
@@ -203,4 +256,12 @@ bool Keyboard::getKeyDown( std::string key ) {
 		}
 	}
 	return false;
+}
+
+bool Keyboard::isEnterKey( ) const {
+	return _enter;
+}
+
+int Keyboard::getBackSpace( ) const {
+	return _backspace;
 }
