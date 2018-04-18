@@ -3,6 +3,7 @@
 #include "Manager.h"
 #include <errno.h>
 #include <assert.h>
+#include <algorithm>
 
 const int KEY_MAX = 256;
 
@@ -54,6 +55,7 @@ Keyboard::Keyboard( ) {
 	_key_string[ KEY_INPUT_MINUS     ] = "-";
 	_key_string[ KEY_INPUT_PERIOD    ] = ".";
 	_key_string[ KEY_INPUT_SLASH     ] = "/";
+	_key_string[ KEY_INPUT_BACKSLASH ] = "\\";
 
 	_key_state[ "0" ] = 0;
 	_key_state[ "1" ] = 0;
@@ -100,6 +102,8 @@ Keyboard::Keyboard( ) {
 	_key_state[ "." ] = 0;
 	_key_state[ "/" ] = 0;
 	_key_state[ " " ] = 0;
+	_key_state[ "\\" ] = 0;
+	_key_state[ "_" ] = 0;
 
 	//テンキー
 	_numpad_string[ KEY_INPUT_NUMPAD0   ] = "0";
@@ -137,6 +141,7 @@ Keyboard::Keyboard( ) {
 	//エンターなどのコマンドキー
 	_command[ KEY_INPUT_RETURN ] = 0;
 	_command[ KEY_INPUT_BACK   ] = 0;
+	_command[ KEY_INPUT_LSHIFT ] = 0;
 	_command[ KEY_INPUT_F1     ] = 0;
 	_command[ KEY_INPUT_F2     ] = 0;
 	_command[ KEY_INPUT_F3     ] = 0;
@@ -177,8 +182,17 @@ void Keyboard::update( ) {
 			}
 
 			if ( key_c[ i ] ) {
+				//アンダーバーだけ特殊
+				if ( CheckHitKey( KEY_INPUT_LSHIFT ) && str == "\\" ) {
+					str = "_";
+				}
 				_key_state[ str ]++;
 			} else {
+				//アンダーバーだけ特殊
+				if ( CheckHitKey( KEY_INPUT_LSHIFT ) && str == "\\" ) {
+					str = "_";
+				}
+
 				if ( _key_state[ str ] != 0 ) {
 					_key_up.push_back( str );
 				}
@@ -241,6 +255,14 @@ std::string Keyboard::getString( ) const {
 	ite = _key_state.begin( );
 	for ( ite; ite != _key_state.end( ); ite++ ) {
 		if ( ite->second == 1 ) {
+			std::unordered_map< int, int >::const_iterator command_ite;
+			command_ite = _command.find( KEY_INPUT_LSHIFT );
+			if ( command_ite->second > 0 ) {
+				//大文字
+				std::string key = ite->first;
+				std::transform( key.cbegin( ), key.cend( ), key.begin( ), toupper );
+				return key;
+			}
 			return ite->first;
 		}
 	}
@@ -260,8 +282,14 @@ bool Keyboard::getKeyUp( std::string key ) const {
 }
 
 bool Keyboard::getKeyDown( std::string key ) const {
-	if ( _key_state.find( key ) != _key_state.end( ) ) {
-		if ( _key_state.find( key )->second == 1 ) {
+	if ( key == "_" ) {
+		return true;
+	}
+
+	std::string str = key;
+	std::transform( str.cbegin( ), str.cend( ), str.begin( ), tolower );
+	if ( _key_state.find( str ) != _key_state.end( ) ) {
+		if ( _key_state.find( str )->second == 1 ) {
 			return true;
 		} else {
 			return false;
