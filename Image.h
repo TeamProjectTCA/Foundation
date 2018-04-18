@@ -5,17 +5,16 @@
 
 PTR( Image );
 
+struct ImageProperty {
+	int width;
+	int height;
+	int handle;
+};
+
 class Image {
 public:
 	Image( std::string path );
 	virtual ~Image( );
-
-public:
-	struct ImageProperty {
-		int width;
-		int height;
-		int handle;
-	};
 
 public:
 	void findFile( std::string path );
@@ -24,8 +23,6 @@ public:
 	int getImageHeight( std::string file_name ) const;
 
 private:
-
-
 	std::string _path;
 	std::unordered_map< std::string, ImageProperty > _images;
 };

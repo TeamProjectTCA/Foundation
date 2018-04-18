@@ -23,7 +23,7 @@ public:
 
 public:
 	//2DŠÖŒW
-	void drawGraph( float x, float y, int handle, bool transflag );
+	void drawGraph( int x, int y, int handle, bool transflag );
 	void drawRotaGraph( float x, float y, double exrate, double angle, int handle, bool transflag );
 	void drawExtendGraph( float x1, float y1, float x2, float y2, int handle, bool transflag );
 	void drawBox( float x1, float y1, float x2, float y2, int color, bool fillflag );
