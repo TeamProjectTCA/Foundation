@@ -25,7 +25,6 @@ public:
 	std::string getString( ) const;
 	bool getKeyUp( std::string key ) const;
 	bool getKeyDown( std::string key ) const;
-	bool isEnterKey( ) const;
 	bool isKeyDownFunction( int num ) const;
 	int getBackSpace( ) const;
 

@@ -12,6 +12,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	ManagerPtr manager = Manager::getInstance( );
 	manager->allInitialize( );
 	while ( true ) {
+		ProcessMessage( );
+
 		manager->update( );
 
 		if ( CheckHitKey( KEY_INPUT_ESCAPE ) ) {

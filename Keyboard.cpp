@@ -56,6 +56,11 @@ Keyboard::Keyboard( ) {
 	_key_string[ KEY_INPUT_PERIOD    ] = ".";
 	_key_string[ KEY_INPUT_SLASH     ] = "/";
 	_key_string[ KEY_INPUT_BACKSLASH ] = "\\";
+	_key_string[ KEY_INPUT_RETURN    ] = "ENTER";
+	_key_string[ KEY_INPUT_UP        ] = "UP_ARROW";
+	_key_string[ KEY_INPUT_DOWN	     ] = "DOWN_ARROW";
+	_key_string[ KEY_INPUT_RIGHT     ] = "RIGHT_ARROW";
+	_key_string[ KEY_INPUT_LEFT	     ] = "LEFT_ARROW";
 
 	_key_state[ "0" ] = 0;
 	_key_state[ "1" ] = 0;
@@ -104,6 +109,11 @@ Keyboard::Keyboard( ) {
 	_key_state[ " " ] = 0;
 	_key_state[ "\\" ] = 0;
 	_key_state[ "_" ] = 0;
+	_key_state[ "ENTER" ] = 0;
+	_key_state[ "UP_ARROW" ] = 0;
+	_key_state[ "DOWN_ARROW" ] = 0;
+	_key_state[ "RIGHT_ARROW" ] = 0;
+	_key_state[ "LEFT_ARROW" ] = 0;
 
 	//テンキー
 	_numpad_string[ KEY_INPUT_NUMPAD0   ] = "0";
@@ -139,7 +149,6 @@ Keyboard::Keyboard( ) {
 	_numpad_state[ "/" ] = 0;
 
 	//エンターなどのコマンドキー
-	_command[ KEY_INPUT_RETURN ] = 0;
 	_command[ KEY_INPUT_BACK   ] = 0;
 	_command[ KEY_INPUT_LSHIFT ] = 0;
 	_command[ KEY_INPUT_F1     ] = 0;
@@ -244,8 +253,16 @@ void Keyboard::update( ) {
 }
 
 int Keyboard::getState( std::string key ) const {
-	if ( _key_state.find( key ) != _key_state.end( ) ) {
-		return _key_state.find( key )->second;
+
+	std::string str = key;
+
+	// ENTERとかではない場合は小文字で検索
+	if ( str.length( ) <= 1 ) {
+		std::transform( str.cbegin( ), str.cend( ), str.begin( ), tolower );
+	}
+
+	if ( _key_state.find( str ) != _key_state.end( ) ) {
+		return _key_state.find( str )->second;
 	}
 	return 0;
 }
@@ -253,8 +270,17 @@ int Keyboard::getState( std::string key ) const {
 std::string Keyboard::getString( ) const {
 	std::unordered_map< std::string, int >::const_iterator ite;
 	ite = _key_state.begin( );
+
+	// 押されているキーを走査
 	for ( ite; ite != _key_state.end( ); ite++ ) {
+		// エンターとかならコンティニュー
+		if ( ite->first.length( ) > 1 ) {
+			continue;
+		}
+
 		if ( ite->second == 1 ) {
+
+			// シフト、ファンクションなど特殊キーを見ていく
 			std::unordered_map< int, int >::const_iterator command_ite;
 			command_ite = _command.find( KEY_INPUT_LSHIFT );
 			if ( command_ite->second > 0 ) {
@@ -271,9 +297,16 @@ std::string Keyboard::getString( ) const {
 }
 
 bool Keyboard::getKeyUp( std::string key ) const {
+	std::string str = key;
+
+	// ENTERとかではない場合は小文字で検索
+	if ( str.length( ) <= 1 ) {
+		std::transform( str.cbegin( ), str.cend( ), str.begin( ), tolower );
+	}
+
 	int size = ( int )_key_up.size( );
 	for ( int i = 0; i < size; i++ ) {
-		if ( _key_up[ i ] == key ) {
+		if ( _key_up[ i ] == str ) {
 			return true;
 		}
 	}
@@ -287,7 +320,12 @@ bool Keyboard::getKeyDown( std::string key ) const {
 	}
 
 	std::string str = key;
-	std::transform( str.cbegin( ), str.cend( ), str.begin( ), tolower );
+
+	// ENTERとかではない場合は小文字で検索
+	if ( str.length( ) <= 1 ) {
+		std::transform( str.cbegin( ), str.cend( ), str.begin( ), tolower );
+	}
+	
 	if ( _key_state.find( str ) != _key_state.end( ) ) {
 		if ( _key_state.find( str )->second == 1 ) {
 			return true;
@@ -296,10 +334,6 @@ bool Keyboard::getKeyDown( std::string key ) const {
 		}
 	}
 	return false;
-}
-
-bool Keyboard::isEnterKey( ) const {
-	return ( _command.find( KEY_INPUT_RETURN )->second == 1 );
 }
 
 bool Keyboard::isKeyDownFunction( int num ) const {

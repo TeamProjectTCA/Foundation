@@ -25,6 +25,7 @@ public:
 	//2D関係
 	void drawGraph( int x, int y, int handle, bool transflag );
 	void drawRotaGraph( float x, float y, double exrate, double angle, int handle, bool transflag );
+	// x1,y1 左上頂点座標、x2,y2 右下頂点座標
 	void drawExtendGraph( float x1, float y1, float x2, float y2, int handle, bool transflag );
 	void drawBox( float x1, float y1, float x2, float y2, int color, bool fillflag );
 	void drawCircle( float x, float y, float r, int color, bool fillflag );
