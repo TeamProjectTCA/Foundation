@@ -61,6 +61,7 @@ Keyboard::Keyboard( ) {
 	_key_string[ KEY_INPUT_DOWN	     ] = "DOWN_ARROW";
 	_key_string[ KEY_INPUT_RIGHT     ] = "RIGHT_ARROW";
 	_key_string[ KEY_INPUT_LEFT	     ] = "LEFT_ARROW";
+	_key_string[ KEY_INPUT_SPACE     ] = "SPACE";
 
 	_key_state[ "0" ] = 0;
 	_key_state[ "1" ] = 0;
@@ -114,6 +115,7 @@ Keyboard::Keyboard( ) {
 	_key_state[ "DOWN_ARROW" ] = 0;
 	_key_state[ "RIGHT_ARROW" ] = 0;
 	_key_state[ "LEFT_ARROW" ] = 0;
+	_key_state[ "SPACE" ] = 0;
 
 	//ÉeÉìÉLÅ[
 	_numpad_string[ KEY_INPUT_NUMPAD0   ] = "0";
