@@ -8,7 +8,7 @@ public:
 	Base( );
 	virtual ~Base( );
 
+	virtual void finalize( );
 	virtual void initialize( ) = 0;
-	virtual void finalize( ) = 0;
 	virtual void update( ) = 0;
 };

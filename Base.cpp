@@ -5,3 +5,6 @@ Base::Base( ) {
 
 Base::~Base( ) {
 }
+
+void Base::finalize( ) {
+}
