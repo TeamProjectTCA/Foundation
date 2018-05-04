@@ -31,20 +31,22 @@ void Drawer::update( ) {
 }
 
 void Drawer::drawGraph( int x, int y, int handle, bool transflag ) {
-	errno_t not_find_handle = handle;
-	assert( not_find_handle != -1 );
+	checkHandle( handle );
 	DrawGraph( x, y, handle, transflag );
 }
 
 void Drawer::drawRotaGraph( float x, float y, double exrate, double angle, int handle, bool transflag ) {
-	errno_t not_find_handle = handle;
-	assert( not_find_handle != -1 );
+	checkHandle( handle );
 	DrawRotaGraphF( x, y, exrate, angle, handle, transflag );
 }
 
+void Drawer::drawRectGraph( float screen_x, float screen_y, int lx, int ly, int width, int height, int handle, bool transflag, bool turnflag ) {
+	checkHandle( handle );
+	DrawRectGraphF( screen_x, screen_y, lx, ly, width, height, handle, transflag, turnflag );
+}
+
 void Drawer::drawExtendGraph( float x1, float y1, float x2, float y2, int handle, bool transflag ) {
-	errno_t not_find_handle = handle;
-	assert( not_find_handle != -1 );
+	checkHandle( handle );
 	DrawExtendGraphF( x1, y1, x2, y2, handle, transflag );
 }
 
@@ -101,6 +103,11 @@ void Drawer::drawShere3D( Vector pos, float r, int div_num, int dif_color, int s
 void Drawer::flip( ) {
 	ScreenFlip( );
 	ClearDrawScreen( );
+}
+
+void Drawer::checkHandle( int handle ) {
+	errno_t not_find_handle = handle;
+	assert( not_find_handle != -1 );
 }
 
 int Drawer::getImage( std::string file_name ) const {
