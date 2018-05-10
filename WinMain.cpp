@@ -11,8 +11,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 	ManagerPtr manager = Manager::getInstance( );
 	manager->allInitialize( );
-	while ( true ) {
-		ProcessMessage( );
+	while ( ProcessMessage( ) == 0 ) {
 
 		manager->update( );
 
