@@ -35,6 +35,11 @@ void Drawer::drawGraph( int x, int y, int handle, bool transflag ) {
 	DrawGraph( x, y, handle, transflag );
 }
 
+void Drawer::drawGraph( float x, float y, int handle, bool transflag ) {
+	checkHandle( handle );
+	DrawGraphF( x, y, handle, transflag );
+}
+
 void Drawer::drawRotaGraph( float x, float y, double exrate, double angle, int handle, bool transflag ) {
 	checkHandle( handle );
 	DrawRotaGraphF( x, y, exrate, angle, handle, transflag );

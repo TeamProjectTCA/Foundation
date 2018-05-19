@@ -24,6 +24,7 @@ public:
 public:
 	// 2D関係
 	void drawGraph( int x, int y, int handle, bool transflag );
+	void drawGraph( float x, float y, int handle, bool transflag );
 	void drawRotaGraph( float x, float y, double exrate, double angle, int handle, bool transflag );
 	void drawRectGraph( float screen_x, float screen_y, int lx, int ly, int width, int height, int handle, bool transflag, bool turnflag = false );
 	// x1,y1 左上頂点座標、x2,y2 右下頂点座標
