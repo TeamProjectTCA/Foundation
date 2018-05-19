@@ -2,18 +2,25 @@
 #include <assert.h>
 #include <errno.h>
 
-const std::string DIR = "Resources/csv/";
+const std::string PATH = "Resources/csv/";
 
-LoadCSV::LoadCSV( ) {
+LoadCSV::LoadCSV( std::string path ) :
+_path( path ) {
+	if ( ( int )path.length( ) < 1 ) {
+		_path = PATH;
+	}
 }
 
 LoadCSV::~LoadCSV( ) {
 }
 
 void LoadCSV::read( std::vector< CsvData > &list, std::string path ) {
+	// ‹ó‚É‚·‚é
+	std::vector< CsvData >( ).swap( list );
+
 	FILE *fp;
 	errno_t read_csv;
-	read_csv = fopen_s( &fp, ( DIR + path + ".csv" ).c_str( ), "rb" );
+	read_csv = fopen_s( &fp, ( _path + path + ".csv" ).c_str( ), "rb" );
 
 	assert( !read_csv );
 

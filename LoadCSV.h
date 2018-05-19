@@ -12,7 +12,7 @@ struct CsvData {
 
 class LoadCSV {
 public:
-	LoadCSV( );
+	LoadCSV( std::string path = "" );
 	virtual ~LoadCSV( );
 
 public:
@@ -21,4 +21,7 @@ public:
 
 private:
 	void findComma( std::vector< std::string > &value, std::string str );
+
+private:
+	std::string _path;
 };
