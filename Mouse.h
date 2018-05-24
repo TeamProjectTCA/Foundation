@@ -25,8 +25,8 @@ private:
 public:
 	int getPointX( ) const;
 	int getPointY( ) const;
-	bool isClickLeft( ) const;
-	bool isClickRight( ) const;
+	bool isClickDownLeft( ) const;
+	bool isClickDownRight( ) const;
 	bool isClickUpLeft( ) const;
 	bool isClickUpRight( ) const;
 	int getClickingLeft( ) const;

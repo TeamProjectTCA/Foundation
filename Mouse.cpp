@@ -74,14 +74,14 @@ int Mouse::getPointY( ) const {
 	return _y;
 }
 
-bool Mouse::isClickLeft( ) const {
+bool Mouse::isClickDownLeft( ) const {
 	if ( _click_left == 1 ) {
 		return true;
 	}
 	return false;
 }
 
-bool Mouse::isClickRight( ) const {
+bool Mouse::isClickDownRight( ) const {
 	if ( _click_right == 1 ) {
 		return true;
 	}
