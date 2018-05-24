@@ -53,32 +53,17 @@ struct Vector {
 	}
 
 	//Š|‚¯ŽZ
-	inline Vector mult( const Vector &vec ) {
+	inline Vector mult( const double &num ) {
 		return Vector( 
-			x * vec.x,
-			y * vec.y,
-			z * vec.z );
+			x * num,
+			y * num,
+			z * num );
 	}
-	inline Vector operator*( const Vector &vec ) {
-		return mult( vec );
+	inline Vector operator*( const double &num ) {
+		return mult( num );
 	}
-	inline Vector operator*=( const Vector &vec ) {
-		*this = *this * vec;
-		return *this;
-	}
-
-	//Š„‚èŽZ
-	inline Vector dif( const Vector &vec ) {
-		return Vector( 
-			x / vec.x,
-			y / vec.y,
-			z / vec.z );
-	}
-	inline Vector operator/( const Vector &vec ) {
-		return dif( vec );
-	}
-	inline Vector operator/=( const Vector &vec ) {
-		*this = *this / vec;
+	inline Vector operator*=( const double &num ) {
+		*this = *this * num;
 		return *this;
 	}
 
