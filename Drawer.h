@@ -34,6 +34,8 @@ public:
 	void drawLine( float x1, float y1, float x2, float y2, int color );
 	void drawString( float x, float y, std::string str, unsigned int color );
 	void drawFormatString( float x, float y, unsigned int color, const char *str, ... );
+	// ’†‰›‘µ‚¦
+	void drawFormatStringCenter( float x, float y, unsigned int color, const char *str, ... );
 
 public:
 	// 3DŠÖŒW

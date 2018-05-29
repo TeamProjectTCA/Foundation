@@ -77,15 +77,34 @@ void Drawer::drawFormatString( float x, float y, unsigned int color, const char 
 	char buf[ BUF_MAX ] = { };
 
 	va_list ap;
-	//str‚æ‚èŒã‚ë‚Ìˆø”‚ğŠi”[
+	// str‚æ‚èŒã‚ë‚Ìˆø”‚ğŠi”[
 	va_start( ap, str );
 
-	//Ši”[‚µ‚½ˆø”‚ğbuf‚É’Ç‰Á
+	// Ši”[‚µ‚½ˆø”‚ğbuf‚É’Ç‰Á
 	vsprintf_s( buf, BUF_MAX, str, ap );
 
-	//ƒŠƒXƒg‚ğƒNƒŠƒA
+	// ƒŠƒXƒg‚ğƒNƒŠƒA
 	va_end( ap );
 	DrawStringF( x, y, buf, color );
+}
+
+void Drawer::drawFormatStringCenter( float x, float y, unsigned int color, const char *str, ... ) {
+	const int BUF_MAX = 1024;
+	char buf[ BUF_MAX ] = { };
+
+	va_list ap;
+	// str‚æ‚èŒã‚ë‚Ìˆø”‚ğŠi”[
+	va_start( ap, str );
+
+	// Ši”[‚µ‚½ˆø”‚ğbuf‚É’Ç‰Á
+	vsprintf_s( buf, BUF_MAX, str, ap );
+
+	// ƒŠƒXƒg‚ğƒNƒŠƒA
+	va_end( ap );
+
+	int len = ( int )strlen( buf );
+	float gap_x = GetDrawStringWidth( buf, len ) / 2.0f;
+	DrawStringF( x - gap_x, y, buf, color );
 }
 
 void Drawer::drawBillBoard3D( Vector pos, float cx, float cy, float size, float angle, int handle, bool transflag ) {
