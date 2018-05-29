@@ -104,6 +104,11 @@ struct Vector {
 		return sqrt( x * x + y * y + z * z ) * max;
 	}
 
+	// ‹——£‚ğ•Ô‚·(sqrt‚É‚æ‚é‘¬“x’á‰º‚ğ–h‚®)
+	inline double getLength2( ) const {
+		return x * x + y * y + z * z;
+	}
+
 	// ³‹K‰»
 	inline Vector normalize( ) {
 		double len = getLength( );
