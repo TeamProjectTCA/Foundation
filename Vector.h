@@ -22,7 +22,7 @@ struct Vector {
 	virtual ~Vector( ) {
 	}
 
-	//ë´ÇµéZ
+	// ë´ÇµéZ
 	inline Vector add( const Vector &vec ) {
 		return Vector( 
 			x + vec.x,
@@ -37,7 +37,7 @@ struct Vector {
 		return *this;
 	}
 
-	//à¯Ç´éZ
+	// à¯Ç´éZ
 	inline Vector sub( const Vector &vec ) {
 		return Vector( 
 			this->x - vec.x,
@@ -52,7 +52,7 @@ struct Vector {
 		return *this;
 	}
 
-	//ä|ÇØéZ
+	// ä|ÇØéZ
 	inline Vector mult( const double &num ) {
 		return Vector( 
 			x * num,
@@ -67,7 +67,7 @@ struct Vector {
 		return *this;
 	}
 
-	//î‰är ==
+	// î‰är ==
 	inline bool operator==( const Vector &vec ) {
 		return ( 
 			x == vec.x &&
@@ -75,7 +75,7 @@ struct Vector {
 			z == vec.z );
 	}
 
-	//î‰är !=
+	// î‰är !=
 	inline bool operator!=( const Vector &vec ) {
 		return (
 			x != vec.x ||
@@ -83,7 +83,7 @@ struct Vector {
 			z != vec.z );
 	}
 
-	//ãóó£Çï‘Ç∑
+	// ãóó£Çï‘Ç∑
 	inline double getLength( ) const {
 		double num[ 3 ] = { fabs( x ), fabs( y ), fabs( z ) };
 		double max = num[ 0 ];
@@ -96,7 +96,7 @@ struct Vector {
 			return 0;
 		}
 
-		//í¥âﬂÇµÇ»Ç¢ÇÊÇ§Ç…è¨êîì_ÇÇÇ∏ÇÁÇ∑
+		// í¥âﬂÇµÇ»Ç¢ÇÊÇ§Ç…è¨êîì_ÇÇÇ∏ÇÁÇ∑
 		double x = this->x / max;
 		double y = this->y / max;
 		double z = this->z / max;
@@ -104,7 +104,7 @@ struct Vector {
 		return sqrt( x * x + y * y + z * z ) * max;
 	}
 
-	//ê≥ãKâª
+	// ê≥ãKâª
 	inline Vector normalize( ) {
 		double len = getLength( );
 		Vector normal = Vector( x / len, y / len, z / len );
@@ -112,4 +112,8 @@ struct Vector {
 		return normal;
 	}
 
+	// ì‡êœ
+	inline double dot( const Vector &vec ) {
+		return x * vec.x + y * vec.y + z * vec.z;
+	}
 };

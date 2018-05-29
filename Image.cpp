@@ -6,6 +6,9 @@
 
 Image::Image( std::string path ) :
 _path( path ) {
+	if ( path == "" ) {
+		return;
+	}
 	findFile( _path );
 }
 

@@ -3,10 +3,16 @@
 
 DxSettingPtr DxSetting::_instance;
 
+const int DEFAULT_GRAPH_WIDTH   = 1280;
+const int DEFAULT_GRAPH_HEIGHT  = 720;
+const int DEFAULT_GRAPH_DEPTH   = 32;
+const int DEFAULT_SCREEN_WIDTH  = 1280;
+const int DEFAULT_SCREEN_HEIGHT = 720;
+
 DxSetting::DxSetting( ) {
 	changeWindowMode( true );
-	setWindowSize( 1280, 720 );
-	setGraphMode( 1280, 720, 32 );
+	setWindowSize( DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT );
+	setGraphMode( DEFAULT_GRAPH_WIDTH, DEFAULT_GRAPH_HEIGHT, DEFAULT_GRAPH_DEPTH );
 	SetDoubleStartValidFlag( TRUE );
 	SetAlwaysRunFlag( TRUE );
 	DxLib_Init( );
