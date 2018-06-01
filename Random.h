@@ -1,6 +1,8 @@
 #pragma once
 #include "smart_ptr.h"
+#include "Base.h"
 #include <vector>
+#include <string>
 
 PTR( Random );
 
@@ -10,22 +12,28 @@ PTR( Random );
 
 */
 
-class Random {
+class Random : public Base {
+public:
+	static RandomPtr getTask( );
+	static std::string getTag( );
+
 public:
 	Random( );
 	virtual ~Random( );
 
 public:
-	void setRange( unsigned long min, unsigned long max );
+	void initialize( );
+	void update( );
+
+public:
 	void setIgnore( unsigned long ignore );
 	void setIgnore( double ignore );
-	void resetRange( );
 	void resetIgnore( );
 
 public:
 	// 32ビット長整数 0x0以上0xffffffff以下
 	unsigned long getInt32( ) const;
-
+	unsigned long getInt32( unsigned long range_min, unsigned long range_max ) const;
 	// 31ビット長整数 0x0以上0x7fffffff以下
 	long getInt31( ) const;
 	
@@ -46,9 +54,6 @@ private:
 	bool isReplay( double num ) const;
 
 private:
-	bool _setting_range;
-	unsigned long _min;
-	unsigned long _max;
 	std::vector< unsigned long > _ignore_long;
 	std::vector< double > _ignore_double;
 };

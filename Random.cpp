@@ -1,28 +1,30 @@
 #include "Random.h"
 #include "MersenneTwister.h"
+#include "Manager.h"
 #include <time.h>
 
 const unsigned long RANGE_MAX_ULONG = 0xffffffff;
 const long RANGE_MAX_LONG = 0x7fffffff;
 
-Random::Random( ) :
-_min( 0 ),
-_max( RANGE_MAX_ULONG - 1 ),
-_setting_range( false ) {
+RandomPtr Random::getTask( ) {
+	return std::dynamic_pointer_cast< Random >( Manager::getInstance( )->getTask( getTag( ) ) );
+}
+
+std::string Random::getTag( ) {
+	return "RANDOM";
+}
+
+Random::Random( ) {
 	init_genrand( ( unsigned int )time( NULL ) );
 }
 
 Random::~Random( ) {
 }
 
-void Random::setRange( unsigned long min, unsigned long max ) {
-	_setting_range = true;
-	_min = min;
-	_max = max;
+void Random::initialize( ) {
+}
 
-	if ( _max == RANGE_MAX_ULONG ) {
-		_max = RANGE_MAX_ULONG - 1;
-	}
+void Random::update( ) {
 }
 
 void Random::setIgnore( unsigned long ignore ) {
@@ -33,18 +35,13 @@ void Random::setIgnore( double ignore ) {
 	_ignore_double.push_back( ignore );
 }
 
-void Random::resetRange( ) {
-	_min = 0;
-	_max = RANGE_MAX_ULONG - 1;
-}
-
 void Random::resetIgnore( ) {
 	std::vector< unsigned long >( ).swap( _ignore_long );
 	std::vector< double >( ).swap( _ignore_double );
 }
 
 unsigned long Random::getInt32( ) const {
-	unsigned long num = genrand_int32( ) % ( _max - _min + 1 ) + _min;
+	unsigned long num = genrand_int32( );
 
 	if ( isReplay( num ) ) {
 		return getInt32( );
@@ -53,13 +50,18 @@ unsigned long Random::getInt32( ) const {
 	}
 }
 
-long Random::getInt31( ) const {
-	long num = 0;
-	if ( _min >= RANGE_MAX_LONG || _max >= RANGE_MAX_LONG ) {
-		num = genrand_int31( );
+unsigned long Random::getInt32( unsigned long range_min, unsigned long range_max ) const {
+	unsigned long num = genrand_int32( ) % ( range_max - range_min + 1 ) + range_min;
+
+	if ( isReplay( num ) ) {
+		return getInt32( range_min, range_max );
 	} else {
-		num = genrand_int31( ) % ( _max - _min + 1 ) + _min;
+		return num;
 	}
+}
+
+long Random::getInt31( ) const {
+	long num = genrand_int31( );
 
 	if ( isReplay( ( unsigned long )num ) ) {
 		return getInt31( );
