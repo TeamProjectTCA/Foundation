@@ -15,6 +15,7 @@
     <ClCompile Include="Soundplayer.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Random.cpp" />
+    <ClCompile Include="Server.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base.h" />
@@ -33,5 +34,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="MersenneTwister.h" />
     <ClInclude Include="Random.h" />
+    <ClInclude Include="Data.h" />
+    <ClInclude Include="Server.h" />
   </ItemGroup>
 </Project>

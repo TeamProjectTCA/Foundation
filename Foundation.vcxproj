@@ -169,6 +169,7 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="MultiThreadLoad.cpp" />
     <ClCompile Include="Random.cpp" />
+    <ClCompile Include="Server.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Soundplayer.cpp" />
     <ClCompile Include="WinMain.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="Base.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="Data.h" />
     <ClInclude Include="Drawer.h" />
     <ClInclude Include="DxSetting.h" />
     <ClInclude Include="Image.h" />
@@ -187,6 +189,7 @@
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="MultiThreadLoad.h" />
     <ClInclude Include="Random.h" />
+    <ClInclude Include="Server.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Soundplayer.h" />
     <ClInclude Include="Vector.h" />
