@@ -21,11 +21,12 @@ public:
 
 public:
 	bool isPlaying( std::string file_name );
-	void play( std::string file_name, int volume = -1, bool loop = false, bool top = false  );
-	void stop( std::string file_name );
+	void play( int handle, bool loop = false, bool top = false, int volume = -1 );
+	void stop( int handle );
 
 public:
 	int getSound( std::string file_name ) const;
+	void checkHandle( int handle );
 
 private:
 	SoundPtr _sound;

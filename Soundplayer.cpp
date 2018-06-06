@@ -36,13 +36,11 @@ bool Soundplayer::isPlaying( std::string file_name ) {
 	return false;
 }
 
-void Soundplayer::play( std::string file_name, int volume, bool loop, bool top ) {
-	if ( getSound( file_name ) < 1 ) {
-		return;
-	}
+void Soundplayer::play( int handle, bool loop, bool top, int volume ) {
+	checkHandle( handle );
 
 	if ( volume > 0 ) {
-		ChangeVolumeSoundMem( volume, getSound( file_name ) );
+		ChangeVolumeSoundMem( volume, handle );
 	}
 
 	int top_flag = FALSE;
@@ -50,15 +48,20 @@ void Soundplayer::play( std::string file_name, int volume, bool loop, bool top )
 		top_flag = TRUE;
 	}
 	if ( !loop ) {
-		PlaySoundMem( getSound( file_name ), DX_PLAYTYPE_BACK, top_flag );
+		PlaySoundMem( handle, DX_PLAYTYPE_BACK, top_flag );
 	} else {
-		PlaySoundMem( getSound( file_name ), DX_PLAYTYPE_LOOP, top_flag );
+		PlaySoundMem( handle, DX_PLAYTYPE_LOOP, top_flag );
 	}
 
 }
 
-void Soundplayer::stop( std::string file_name ) {
-	StopSoundMem( getSound( file_name ) );
+void Soundplayer::stop( int handle ) {
+	StopSoundMem( handle );
+}
+
+void Soundplayer::checkHandle( int handle ) {
+	errno_t not_find_handle = handle;
+	assert( not_find_handle != -1 );
 }
 
 int Soundplayer::getSound( std::string file_name ) const {
