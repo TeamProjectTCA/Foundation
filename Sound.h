@@ -1,20 +1,29 @@
 #pragma once
-#include "smart_ptr.h"
+#include "Base.h"
 #include <string>
-#include <unordered_map>
 
 PTR( Sound );
 
-class Sound {
+class Sound : public Base {
 public:
-	Sound( std::string path );
+	static SoundPtr getTask( );
+	static std::string getTag( );
+
+public:
+	Sound( );
 	virtual ~Sound( );
 
 public:
-	void findFile( std::string path );
-	int getSound( std::string file_name ) const;
+	void initialize( );
+	void finalize( );
+	void update( );
 
-private:
-	std::string _path;
-	std::unordered_map< std::string, int > _sounds;
+public:
+	bool isPlaying( int handle );
+	void play( int handle, bool loop = false, bool top = false, int volume = -1 );
+	void stop( int handle );
+
+public:
+	int load( std::string file_name ) const;
+	void checkHandle( int handle );
 };

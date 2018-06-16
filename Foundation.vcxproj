@@ -171,7 +171,6 @@
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="Sound.cpp" />
-    <ClCompile Include="Soundplayer.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -191,7 +190,6 @@
     <ClInclude Include="Random.h" />
     <ClInclude Include="Server.h" />
     <ClInclude Include="Sound.h" />
-    <ClInclude Include="Soundplayer.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

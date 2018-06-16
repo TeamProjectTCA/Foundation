@@ -1,67 +1,67 @@
 #include "Sound.h"
 #include "DxLib.h"
+#include "Manager.h"
 #include <errno.h>
 #include <assert.h>
-#include <Windows.h>
 
-Sound::Sound( std::string path ) :
-_path( path ) {
-	findFile( _path );
+SoundPtr Sound::getTask( ) {
+	return std::dynamic_pointer_cast< Sound >( Manager::getInstance( )->getTask( getTag( ) ) );
+}
+
+std::string Sound::getTag( ) {
+	return "SOUND";
+}
+
+Sound::Sound( ) {
 }
 
 Sound::~Sound( ) {
 }
 
-int Sound::getSound( std::string file_name ) const {
-	if ( _sounds.find( file_name ) != _sounds.end( ) ) {
-		return _sounds.find( file_name )->second;
-	}
-	return -1;
+void Sound::initialize( ) {
 }
 
-void Sound::findFile( std::string path ) {
-	WIN32_FIND_DATA data;
-	HANDLE handle;
+void Sound::finalize( ) {
+}
 
-	path += "/";
+void Sound::update( ) {
+}
 
-	handle = FindFirstFile( ( path + "*" ).c_str( ), &data );
+bool Sound::isPlaying( int handle ) {
+	if ( CheckSoundMem( handle ) == TRUE ) {
+		return true;
+	}
+	return false;
+}
 
-	errno_t find_handle = ( handle != INVALID_HANDLE_VALUE );
-	assert( find_handle );
+void Sound::play( int handle, bool loop, bool top, int volume ) {
+	checkHandle( handle );
 
-	do {
+	if ( volume > 0 ) {
+		ChangeVolumeSoundMem( volume, handle );
+	}
 
-		if ( ( data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY ) ) {
-			//ディレクトリ	                  
-			std::string file_name = data.cFileName;
-			if ( file_name != "." && file_name != ".." ) {
-				//再起(サブディレクトリ検索)
-				findFile( ( path + file_name ) );
-			}
+	int top_flag = FALSE;
+	if ( top ) {
+		top_flag = TRUE;
+	}
+	if ( !loop ) {
+		PlaySoundMem( handle, DX_PLAYTYPE_BACK, top_flag );
+	} else {
+		PlaySoundMem( handle, DX_PLAYTYPE_LOOP, top_flag );
+	}
 
-		} else {
-			//ファイル
-			//名前
-			std::string file_name = data.cFileName;
-			std::string file_extension = data.cFileName;
+}
 
-			{//ファイル名を取得
-				file_name = file_name.substr( 0, file_name.find_last_of( "." ) );
-			}
+void Sound::stop( int handle ) {
+	StopSoundMem( handle );
+}
 
-			{//拡張子を取得
-				int pos = ( int )file_extension.find_last_of( "." ) + 1;
-				file_extension = file_extension.substr( pos, file_extension.length( ) - pos );
-			}
+void Sound::checkHandle( int handle ) {
+	errno_t not_find_handle = handle;
+	assert( not_find_handle != -1 );
+}
 
-			//拡張子を識別し、サウンドロード
-			if ( file_extension == "mp3" || file_extension == "ogg" ) {
-				_sounds[ file_name ] = LoadSoundMem( ( path + data.cFileName ).c_str( ) );
-			}
-		}
-
-	} while ( FindNextFile( handle, &data ) );
-
-	FindClose( handle );
+int Sound::load( std::string file_name ) const {
+	return LoadSoundMem( file_name.c_str( ) );
 }

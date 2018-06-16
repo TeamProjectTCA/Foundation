@@ -12,7 +12,6 @@
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="DxSetting.cpp" />
     <ClCompile Include="Sound.cpp" />
-    <ClCompile Include="Soundplayer.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Server.cpp" />
@@ -29,7 +28,6 @@
     <ClInclude Include="Vector.h" />
     <ClInclude Include="DxSetting.h" />
     <ClInclude Include="Sound.h" />
-    <ClInclude Include="Soundplayer.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="MersenneTwister.h" />
