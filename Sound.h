@@ -1,6 +1,7 @@
 #pragma once
 #include "Base.h"
 #include <string>
+#include <unordered_map>
 
 PTR( Sound );
 
@@ -24,6 +25,9 @@ public:
 	void stop( int handle );
 
 public:
-	int load( std::string file_name ) const;
+	int load( std::string file_name );
 	void checkHandle( int handle );
+
+private:
+	std::unordered_map< std::string, int > _sound_handles;
 };

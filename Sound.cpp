@@ -62,6 +62,10 @@ void Sound::checkHandle( int handle ) {
 	assert( not_find_handle != -1 );
 }
 
-int Sound::load( std::string file_name ) const {
-	return LoadSoundMem( file_name.c_str( ) );
+int Sound::load( std::string file_name ) {
+	if ( _sound_handles[ file_name ] != 0 ) {
+		return _sound_handles[ file_name ];
+	}
+	_sound_handles[ file_name ] = LoadSoundMem( file_name.c_str( ) );
+	return _sound_handles[ file_name ];
 }
