@@ -11,7 +11,7 @@ public:
 	static std::string getTag( );
 
 public:
-	Sound( );
+	Sound( std::string sound_path );
 	virtual ~Sound( );
 
 public:
@@ -29,5 +29,6 @@ public:
 	void checkHandle( int handle );
 
 private:
+	std::string _sound_path;
 	std::unordered_map< std::string, int > _sound_handles;
 };

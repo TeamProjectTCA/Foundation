@@ -12,7 +12,8 @@ std::string Sound::getTag( ) {
 	return "SOUND";
 }
 
-Sound::Sound( ) {
+Sound::Sound( std::string sound_path ) :
+_sound_path( sound_path ){
 }
 
 Sound::~Sound( ) {
@@ -63,9 +64,9 @@ void Sound::checkHandle( int handle ) {
 }
 
 int Sound::load( std::string file_name ) {
-	if ( _sound_handles[ file_name ] != 0 ) {
-		return _sound_handles[ file_name ];
+	std::string file = _sound_path + "/" + file_name;
+	if ( _sound_handles[ file ] == 0 ) {
+		_sound_handles[ file ] = LoadSoundMem( file.c_str( ) );
 	}
-	_sound_handles[ file_name ] = LoadSoundMem( file_name.c_str( ) );
-	return _sound_handles[ file_name ];
+	return _sound_handles[ file ];
 }
