@@ -11,7 +11,12 @@ std::string Mouse::getTag( ) {
 	return "MOUSE_EVENT";
 }
 
-Mouse::Mouse( ) {
+Mouse::Mouse( ) :
+_mouse( NULL ),
+_click_left( 0 ),
+_click_right( 0 ),
+_clickup_left( false ),
+_clickup_right( false ) {
 	initialize( );
 }
 
@@ -19,16 +24,6 @@ Mouse::~Mouse( ) {
 }
 
 void Mouse::initialize( ) {
-	_mouse = NULL;
-	_click_left = 0;
-	_click_right = 0;
-	_x = 0;
-	_y = 0;
-	_clickup_left = false;
-	_clickup_right = false;
-}
-
-void Mouse::finalize( ) {
 }
 
 void Mouse::update( ) {
@@ -37,7 +32,11 @@ void Mouse::update( ) {
 	_mouse = GetMouseInput( );
 	calcLeftClick( );
 	calcRightClick( );
-	GetMousePoint( &_x, &_y );
+
+	int x;
+	int y;
+	GetMousePoint( &x, &y );
+	_pos = Vector( x, y );
 }
 
 void Mouse::calcLeftClick( ) {
@@ -66,12 +65,8 @@ void Mouse::calcRightClick( ) {
 	_click_right = 0;
 }
 
-int Mouse::getPointX( ) const {
-	return _x;
-}
-
-int Mouse::getPointY( ) const {
-	return _y;
+Vector Mouse::getPoint( ) const {
+	return _pos;
 }
 
 bool Mouse::isClickDownLeft( ) const {

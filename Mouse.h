@@ -1,5 +1,6 @@
 #pragma once
 #include "Base.h"
+#include "Vector.h"
 #include <string>
 
 PTR( Mouse );
@@ -15,7 +16,6 @@ public:
 
 public:
 	void initialize( );
-	void finalize( );
 	void update( );
 
 private:
@@ -23,8 +23,7 @@ private:
 	void calcRightClick( );
 
 public:
-	int getPointX( ) const;
-	int getPointY( ) const;
+	Vector getPoint( ) const;
 	bool isClickDownLeft( ) const;
 	bool isClickDownRight( ) const;
 	bool isClickUpLeft( ) const;
@@ -33,11 +32,10 @@ public:
 	int getClickingRight( ) const;
 
 private:
+	Vector _pos;
 	int _mouse;
 	int _click_left;
 	int _click_right;
-	int _x;
-	int _y;
 	bool _clickup_left;
 	bool _clickup_right;
 };
