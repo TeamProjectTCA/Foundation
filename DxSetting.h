@@ -8,17 +8,13 @@ public:
 	DxSetting( );
 	virtual ~DxSetting( );
 
-public:
-	static void initialize( );
-	static void finalize( );
-	static DxSettingPtr getInstance( );
+private:
+	void initialize( );
 
 public:
-	void initDxLib( );
 	void setDrawScreenBack( );
-	void setDrawScreen( unsigned int screen );
 	void changeWindowMode( bool flag );
-	void setGraphMode( int width, int height, int color_bit_depth, int refresh_rate = 60 );
+	void setGraphMode( int width, int height );
 	void setWindowSize( int width, int height );
 
 public:
@@ -26,7 +22,18 @@ public:
 	void setUseLighting( bool flag );
 	void setUseZBuffer( bool flag );
 
+public:
+	int getWindowWidth ( ) const;
+	int getWindowHeight( ) const;
+	int getScreenWidth ( ) const;
+	int getScreenHeight( ) const;
+
 private:
-	static DxSettingPtr _instance;
+	int _window_mode;
+	int _window_width;
+	int _window_height;
+	int _screen_width;
+	int _screen_height;
+	int _draw_screen;
 };
 

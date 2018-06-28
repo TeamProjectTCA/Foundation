@@ -4,6 +4,7 @@
 #include <map>
 
 PTR( Manager );
+PTR( DxSetting );
 
 class Manager {
 public:
@@ -22,10 +23,21 @@ public:
 	BasePtr getTask( std::string tag );
 	bool isFin( ) const;
 
-private:
-	static ManagerPtr _instance;
-	bool _fin;
+public:
+	void setWindowSize( int width, int height );
+	void setScreenSize( int width, int height );
+	void changeWindowMode( bool flag );
 
+public:
+	int getWindowWidth ( ) const;
+	int getWindowHeight( ) const;
+	int getScreenWidth ( ) const;
+	int getScreenHeight( ) const;
+
+private:
+	bool _fin;
+	static ManagerPtr _instance;
+	DxSettingPtr _setting;
 	std::map< std::string, BasePtr > _exe;
 };
 

@@ -1,64 +1,55 @@
 #include "DxSetting.h"
 #include "DxLib.h"
 
-DxSettingPtr DxSetting::_instance;
-
 const int DEFAULT_GRAPH_WIDTH   = 1280;
 const int DEFAULT_GRAPH_HEIGHT  = 720;
 const int DEFAULT_GRAPH_DEPTH   = 32;
 const int DEFAULT_SCREEN_WIDTH  = 1280;
 const int DEFAULT_SCREEN_HEIGHT = 720;
 
-DxSetting::DxSetting( ) {
-	changeWindowMode( true );
-	setWindowSize( DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT );
-	setGraphMode( DEFAULT_GRAPH_WIDTH, DEFAULT_GRAPH_HEIGHT, DEFAULT_GRAPH_DEPTH );
-	SetDoubleStartValidFlag( TRUE );
-	SetAlwaysRunFlag( TRUE );
-	DxLib_Init( );
-	setDrawScreenBack( );
+DxSetting::DxSetting( ) :
+_window_mode( TRUE ),
+_window_width( DEFAULT_SCREEN_WIDTH ),
+_window_height( DEFAULT_SCREEN_HEIGHT ),
+_screen_width( DEFAULT_GRAPH_WIDTH ),
+_screen_height( DEFAULT_GRAPH_HEIGHT ),
+_draw_screen( DX_SCREEN_BACK ) {
+	initialize( );
 }
 
 DxSetting::~DxSetting( ) {
 }
 
 void DxSetting::initialize( ) {
-	if ( !_instance ) {
-		_instance = DxSettingPtr( new DxSetting( ) );
-	}
-}
-
-void DxSetting::finalize( ) {
-	if ( _instance ) {
-		_instance.reset( );
-	}
-}
-
-DxSettingPtr DxSetting::getInstance( ) {
-	return _instance;
-}
-
-void DxSetting::initDxLib( ) {
+	ChangeWindowMode( _window_mode );
+	SetWindowSize( _window_width, _window_height );
+	SetGraphMode( _screen_width, _screen_height, DEFAULT_GRAPH_DEPTH );
+	SetDoubleStartValidFlag( TRUE );
+	SetAlwaysRunFlag( TRUE );
 	DxLib_Init( );
+	SetDrawScreen( _draw_screen );
 }
 
 void DxSetting::setDrawScreenBack( ) {
-	SetDrawScreen( DX_SCREEN_BACK );
-}
-
-void DxSetting::setDrawScreen( unsigned int screen ) {
-	SetDrawScreen( screen );
 }
 
 void DxSetting::changeWindowMode( bool flag ) {
-	ChangeWindowMode( flag );
+	_window_mode = ( flag ? TRUE : FALSE );
+
+	initialize( );
 }
 
-void DxSetting::setGraphMode( int width, int height, int color_bit_depth, int refresh_rate ) {
-	SetGraphMode( width, height, color_bit_depth, refresh_rate );
+void DxSetting::setGraphMode( int width, int height ) {
+	_screen_width = width;
+	_screen_height = height;
+
+	initialize( );
 }
 
 void DxSetting::setWindowSize( int width, int height ) {
+	_window_width = width;
+	_window_height = height;
+
 	SetWindowSize( width, height );
 }
 
@@ -73,4 +64,20 @@ void DxSetting::setUseLighting( bool flag ) {
 void DxSetting::setUseZBuffer( bool flag ) {
 	SetUseZBufferFlag( flag );
 	SetWriteZBufferFlag( flag );
+}
+
+int DxSetting::getWindowWidth ( ) const {
+	return _window_width;
+}
+
+int DxSetting::getWindowHeight( ) const {
+	return _window_height;
+}
+
+int DxSetting::getScreenWidth ( ) const {
+	return _screen_width;
+}
+
+int DxSetting::getScreenHeight( ) const {
+	return _screen_height;
 }

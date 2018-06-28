@@ -1,10 +1,12 @@
 #include "Manager.h"
 #include "Base.h"
+#include "DxSetting.h"
 
 ManagerPtr Manager::_instance;
 
-Manager::Manager( ) {
-	_fin = false;
+Manager::Manager( ) :
+_fin( false ) {
+	_setting = DxSettingPtr( new DxSetting( ) );
 }
 
 Manager::~Manager( ) {
@@ -64,4 +66,32 @@ BasePtr Manager::getTask( std::string tag ) {
 
 bool Manager::isFin( ) const {
 	return _fin;
+}
+
+void Manager::setWindowSize( int width, int height ) {
+	_setting->setWindowSize( width, height );
+}
+
+void Manager::setScreenSize( int width, int height ) {
+	_setting->setGraphMode( width, height );
+}
+
+void Manager::changeWindowMode( bool flag ) {
+	_setting->changeWindowMode( flag );
+}
+
+int Manager::getWindowWidth ( ) const {
+	return _setting->getWindowWidth( );
+}
+
+int Manager::getWindowHeight( ) const {
+	return _setting->getWindowHeight( );
+}
+
+int Manager::getScreenWidth ( ) const {
+	return _setting->getScreenWidth( );
+}
+
+int Manager::getScreenHeight( ) const {
+	return _setting->getScreenHeight( );
 }
