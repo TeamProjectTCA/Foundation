@@ -44,6 +44,9 @@ public:
 	void drawShere3D( Vector pos, float r, int div_num, int dif_color, int spc_color, bool fillflag );
 
 public:
+	void setGraphAlpha( int alpha );
+
+public:
 	void flip( );
 
 private:

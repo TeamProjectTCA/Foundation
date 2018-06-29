@@ -124,6 +124,14 @@ void Drawer::drawShere3D( Vector pos, float r, int div_num, int dif_color, int s
 	DrawSphere3D( vec, r, div_num, dif_color, spc_color, fillflag );
 }
 
+void Drawer::setGraphAlpha( int alpha ) {
+	if ( alpha == 0 ) {
+		SetDrawBlendMode( DX_BLENDMODE_NOBLEND, alpha );
+		return;
+	}
+	SetDrawBlendMode( DX_BLENDMODE_ALPHA, alpha );
+}
+
 void Drawer::flip( ) {
 	ScreenFlip( );
 	ClearDrawScreen( );
