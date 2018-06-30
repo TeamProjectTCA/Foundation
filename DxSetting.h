@@ -12,7 +12,9 @@ private:
 	void initialize( );
 
 public:
-	void setDrawScreenBack( );
+	void finalize( );
+
+public:
 	void changeWindowMode( bool flag );
 	void setGraphMode( int width, int height );
 	void setWindowSize( int width, int height );

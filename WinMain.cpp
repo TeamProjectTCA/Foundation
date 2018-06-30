@@ -20,6 +20,5 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	}
 
 	Manager::finalize( );
-	DxLib_End( );
 	return 0;
 }

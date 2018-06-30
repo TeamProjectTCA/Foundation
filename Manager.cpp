@@ -16,6 +16,8 @@ Manager::~Manager( ) {
 	for ( ite; ite != _exe.end( ); ite++ ) {
 		ite->second->finalize( );
 	}
+
+	_setting->finalize( );
 }
 
 ManagerPtr Manager::getInstance( ) {
